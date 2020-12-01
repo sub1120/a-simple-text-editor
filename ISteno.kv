@@ -1,0 +1,434 @@
+RootWindow:
+
+<FindNextBox>:
+	text_input:text_box
+	spacing:20
+	orientation:"vertical"
+	TextInput:
+		id:text_box
+		focus:True
+		hint_text:"Find text" 
+	Button:
+		text:"Find Next"
+		size:(100, 40)
+		size_hint:(None, None)
+		pos_hint:{'right':.75}
+		on_press:root.changefind()
+
+<ReplaceBox>:
+	replace_input:replace_box
+	with_input:with_box
+	orientation:"vertical"
+	spacing:10
+	TextInput:
+		id:replace_box
+		focus:True
+		hint_text:"replace text" 
+	TextInput:
+		id:text_box
+		hint_text:"with text" 
+		id:with_box
+	BoxLayout:
+		spacing:10
+		Button:
+			text:"Replace"
+			size:(100, 40)
+			size_hint:(None, None)
+			pos_hint:{'right':.75}
+			on_press:root.changefind1()
+		Button:
+			text:"Replace All"
+			size:(100, 40)
+			size_hint:(None, None)
+			pos_hint:{'right':.75}
+			on_press:root.changefind2()
+
+<FindBox>:
+	text_input:text_box
+	spacing:12
+	orientation:"vertical"
+	TextInput:
+		id:text_box
+		focus:True
+		hint_text:"find text" 
+	Button:
+		text:"Find"
+		size:(100, 40)
+		size_hint:(None, None)
+		pos_hint:{'right':.75}
+		on_press:root.changefind()
+
+<CustomBotton@Button>:
+    size_hint_y: None
+    height: 20
+
+<CustomDropDown>:
+    CustomBotton:
+        text: "0.5"
+        on_release: root.select('0.5')
+    CustomBotton:
+        text: "1"
+        on_release: root.select('1.0')
+    CustomBotton:
+        text: "1.2"
+        on_release: root.select('1.2')
+    CustomBotton:
+        text: "1.5"
+        on_release: root.select('1.5')
+    CustomBotton:
+        text: "2"
+        on_release: root.select('2')
+
+<FontDropDown>:
+    CustomBotton:
+        text: "Arial"
+        on_release: root.select('Arial')
+
+    CustomBotton:
+        text: "Times New Roman"
+        on_release: root.select('Times New Roman')
+
+    
+<MyTextInput>:
+	multiline:True
+	input_type:"text"
+	suggestion_text:"hey"
+	font_context:"system://myapp"
+	font_name:"fonts//arial0r.ttf"
+	use_bubble:True
+
+<PropertiesPanel>
+	orientation:"vertical"
+	line_space:linespace
+	font_bold:bold
+	font_italic:italic
+	font_name:f_name
+	font_size:f_size.text
+	left_align:lefta
+	right_align:righta
+	center_align:centera
+	color:text_color
+
+	BoxLayout:
+		padding:10
+		size_hint_y:.25
+		canvas.before:
+			Color:
+				rgba: .1, .5, .4, 1
+			Rectangle:
+				pos: self.pos
+				size: self.size
+		BoxLayout:
+			orientation:"vertical"
+			spacing:15
+			canvas.before:
+				Color:
+					rgba: .1, .5, .35, 1
+				RoundedRectangle:
+					pos: self.pos
+					size: self.size
+					radius:[3, 3, 3, 3]
+			BoxLayout:
+				Label:
+					size_hint:(None,None)
+					size:(100,30)
+					text: 'Option 1'
+				Switch:
+					size_hint:(None,None)
+					size:(155,30)
+					id:switch1
+			BoxLayout:
+				Label:
+					size_hint:(None,None)
+					size:(100,30)
+					text: 'Option 2'
+				Switch:
+					size_hint:(None,None)
+					size:(155,30)
+					id:switch2
+			BoxLayout:
+				Label:
+					size_hint:(None,None)
+					size:(100,30)
+					text: 'Option 3'
+				Switch:
+					size_hint:(None,None)
+					size:(155,30)
+					id:switch3
+	BoxLayout:
+		padding:5
+		spacing:10
+		orientation:"vertical"
+		canvas.before:
+			Color:
+				rgba: .3, .3, .3, 1
+			Rectangle:
+				pos: self.pos
+				size: self.size
+		BoxLayout:
+			size_hint_y:.9
+			orientation:"vertical"
+			Label:
+				text:"Font"
+				size_hint_x:None
+				width:230
+				size_hint_y:.3
+				canvas.before:
+					Color:
+						rgba: .18 ,.18, .18, 1
+					RoundedRectangle:
+						pos: self.pos
+						size:self.size
+						radius:[5, 5, 0, 0]
+			BoxLayout:
+				orientation:'vertical'
+				padding:10
+				canvas.before:
+					Color:
+						rgba: .25, .25, .25, 1
+					RoundedRectangle:
+						pos: self.pos
+						size: 230,self.size[1]
+						radius:[0, 0, 5, 5]
+				BoxLayout:
+					spacing:5
+					Button:
+						id:f_name
+						text:"Arial"
+						size_hint:(None, None)
+						on_release:root.open_fonts()
+						on_text:root.set_font()
+						size:(170,30)
+					TextInput:
+						id:f_size
+						text:"15"
+						on_text:root.set_font_size()
+						size_hint:(None, None)
+						size:(30,30)
+				BoxLayout:
+					spacing:140
+					BoxLayout:
+						ToggleButton:
+							id:bold
+							size_hint:(None,None)
+							size:(30,30)
+							group:'bold'
+							on_press:root.set_font()
+							canvas:
+								Rectangle:
+									source:"icons//bold.png"
+									pos: (self.pos[0] + 5,self.pos[1] + 5)
+									size:(self.size[0]-10,self.size[1]-10)
+						ToggleButton:
+							id:italic
+							size_hint:(None,None)
+							size:(30,30)
+							group:'italic'
+							on_press:root.set_font()
+							canvas:
+								Rectangle:
+									source:"icons//italic.png"
+									pos: (self.pos[0] + 8,self.pos[1] + 8)
+									size:(self.size[0]-15,self.size[1]-15)
+
+					BoxLayout:
+						Button:
+							id:text_color
+							size_hint:(None, None)
+							size:(30,30)
+							background_normal:''
+							background_color:0,0,0,1
+							on_press:root.open_color()
+
+		BoxLayout:
+			size_hint_y:.6
+			orientation:"vertical"
+			Label:
+				size_hint_y:.5
+				size_hint_x:None
+				width:230
+				text:"Text Alignment"
+				canvas.before:
+					Color:
+						rgba: .18 ,.18, .18, 1
+					RoundedRectangle:
+						pos: self.pos
+						size:self.size
+						radius:[5, 5, 0, 0]
+			BoxLayout:
+				padding:10
+				canvas.before:
+					Color:
+						rgba: .25, .25, .25, 1
+					RoundedRectangle:
+						pos: self.pos
+						size: 230,self.size[1]
+						radius:[0, 0, 5, 5]
+				BoxLayout:
+					BoxLayout:
+						ToggleButton:
+							id:lefta
+							size_hint:(None,None)
+							size:(30,30)
+							group:'align'
+							state:'down'
+							on_press:root.align_text()
+							canvas:
+								Rectangle:
+									source:"icons//lalign.png"
+									pos: (self.pos[0] + 5,self.pos[1] + 5)
+									size:(self.size[0]-10,self.size[1]-10)
+						ToggleButton:
+							id:centera
+							size_hint:(None,None)
+							size:(30,30)
+							group:'align'
+							on_press:root.align_text()
+							canvas:
+								Rectangle:
+									source:"icons//calign.png"
+									pos: (self.pos[0] + 5,self.pos[1] + 5)
+									size:(self.size[0]-10,self.size[1]-10)
+						ToggleButton:
+							id:righta
+							size_hint:(None,None)
+							size:(30,30)
+							group:'align'
+							on_press:root.align_text()
+							canvas:
+								Rectangle:
+									source:"icons//ralign.png"
+									pos: (self.pos[0] + 5,self.pos[1] + 5)
+									size:(self.size[0]-10,self.size[1]-10)
+					Button:
+						id:linespace
+						size_hint:(None, None)
+						size:(30,30)
+						on_release:root.showlp()
+						on_text:root.set_line_space()
+						canvas:
+							Rectangle:
+								source:"icons//lspace.png"
+								pos: (self.pos[0] + 5,self.pos[1] + 5)
+								size:(self.size[0]-10,self.size[1]-10)
+
+		BoxLayout:
+			size_hint_y:.9
+			orientation:"vertical"
+			Label:
+				size_hint_y:.35
+				size_hint_x:None
+				width:230
+				text:"Other Properties"
+				canvas.before:
+					Color:
+						rgba: .18 ,.18, .18, 1
+					RoundedRectangle:
+						pos: self.pos
+						size:self.size
+						radius:[5, 5, 0, 0]
+			BoxLayout:
+				padding:10
+				canvas.before:
+					Color:
+						rgba: .25, .25, .25, 1
+					RoundedRectangle:
+						pos: self.pos
+						size: 230,self.size[1]
+						radius:[0, 0, 5, 5]
+		BoxLayout:
+
+<RootWindow>:
+	text_input:text_box1
+	prop_panel:prop
+	appm:appmenu
+	BoxLayout:
+		top:70
+		Splitter:
+			max_size:root.size[0]
+			min_size:root.size[0]-240
+			sizable_from:'right'
+			MyTextInput:
+				id:text_box1
+				hint_text:'type something'
+
+		PropertiesPanel:
+			id:prop
+			size_hint_x:None
+			width:240
+
+	AppMenu:
+		id:appmenu
+		top:root.height
+		cancel_handler_widget : root
+		AppMenuTextItem
+			text:"Edit"
+			ContextMenu:
+				ContextMenuTextItem:
+					text:"New"
+					on_press:root.new()
+					on_release:appmenu.close_all()
+				ContextMenuTextItem:
+					text:"Open"
+					on_press:root.open_file_browser()
+					on_release:appmenu.close_all()
+				ContextMenuTextItem:
+					text:"Save"
+					on_press:root.save()
+					on_release:appmenu.close_all()
+				ContextMenuTextItem:
+					text:"SaveAs"
+					on_press:root.save_as_browser()
+					on_release:appmenu.close_all()
+				ContextMenuDivider:
+				ContextMenuTextItem:
+					text:"Exit"
+					on_press:app.stop()	
+					on_release:appmenu.close_all()
+		AppMenuTextItem:
+			text:"Edit"
+			ContextMenu:
+				ContextMenuTextItem:
+					text:"Undo"
+					on_press:root.text_input.do_undo()
+					on_release:appmenu.close_all()
+				ContextMenuTextItem:
+					text:"Redo"
+					on_press:root.text_input.do_redo()
+					on_release:appmenu.close_all()
+				ContextMenuDivider:
+				ContextMenuTextItem:
+					text:"Cut"
+					on_press:root.text_input.cut()
+					on_release:appmenu.close_all()
+				ContextMenuTextItem:
+					text:"Copy"
+					on_press:root.text_input.copy()
+					on_release:appmenu.close_all()
+				ContextMenuTextItem:
+					text:"Paste"
+					on_press:root.text_input.paste()
+					on_release:appmenu.close_all()
+				ContextMenuTextItem:
+					text:"SelectAll"
+					on_press:root.text_input.select_all()
+					on_release:appmenu.close_all()
+				ContextMenuTextItem:
+					text:"Delete"	
+					on_press:root.text_input.delete_selection()
+					on_release:appmenu.close_all()
+		AppMenuTextItem:
+			text:"Find"
+			ContextMenu:
+				ContextMenuTextItem:
+					text:"Find"
+					on_press:root.open_find()
+					on_release:appmenu.close_all()
+				ContextMenuTextItem:
+					text:"Find Next"
+					on_press:root.open_find_next()
+					on_release:appmenu.close_all()
+				ContextMenuTextItem:
+					text:"Replace"
+					on_press:root.open_replace()
+					on_release:appmenu.close_all()
